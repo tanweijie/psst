@@ -34,7 +34,7 @@ Copy the latest token for `alice` into the token page and click **Sign in**. Rep
 
 The local Compose database accepts connections without a password only on its private Docker network; it is not published to the host. The demo serves HTTP, so message transport is **not** protected from a network observer. A real deployment needs HTTPS/WSS with a trusted certificate, database authentication, and `COOKIE_SECURE=true`. No database secret is committed here.
 
-## Interview map
+## Notes
 
 - `chat/ui`: the AppLayout chat screen and Spring Security configuration for its generated one-time-token pages.
 - `src/main/frontend/styles.css` styles chat; `src/main/resources/org/springframework/security/default-ui.css` styles Spring Security's generated login pages without replacing their forms.
@@ -59,4 +59,12 @@ Manual browser check:
 3. Send `<b>Hello</b>`; it should display as text. Try a blank or more than 2,000-character message; the service rejects it.
 4. Sign in as Charlie in another profile; Charlie cannot see the Alice/Bob thread. Sign out and try reusing the same token; Spring Security rejects it. Request a new Alice token in a fresh profile to demonstrate that log access allows a known username to be claimed.
 
-Group creation, read receipts, delivery acknowledgments, end-to-end encryption, and multi-node push are outside this MVP.
+## Known missing features
+
+1. Group creation
+2. Read receipts
+3. Delivery acknowledgments
+4. Msg notifications
+5. End-to-end encryption
+6. HTTPS
+7. Exposing OTT in logs
