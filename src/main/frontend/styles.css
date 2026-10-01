@@ -1,0 +1,302 @@
+html {
+    --composer-h: 72px;
+    --control-h: 36px;
+    --header-h: 60px;
+    --lumo-font-family: Inter, "Segoe UI", Arial, sans-serif;
+    --lumo-primary-color: #23675f;
+    --lumo-primary-text-color: #23675f;
+    --lumo-primary-color-10pct: #e8f3f0;
+    --lumo-body-text-color: #1c2b32;
+    color: #1c2b32;
+}
+
+html, body {
+    margin: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Keep the drawer beside the conversation at every screen width. */
+vaadin-app-layout.chat-shell {
+    --vaadin-app-layout-drawer-width: 320px;
+    --vaadin-app-layout-drawer-overlay: false;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+}
+
+vaadin-app-layout.chat-shell::part(drawer) {
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #f5f8f7;
+    border-right: 1px solid #e1e9e6;
+}
+
+vaadin-app-layout.chat-shell::part(content) {
+    min-width: 0;
+    overflow: hidden;
+    background: #fbfcfb;
+}
+
+.chat-drawer {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    box-sizing: border-box;
+    align-items: stretch;
+    overflow-x: hidden;
+    padding: 0 20px 28px !important;
+}
+
+.drawer-brand {
+    margin: var(--header-h) 0 24px;
+    color: #174b46;
+    font-size: 1.7rem;
+    font-weight: 750;
+    letter-spacing: -0.055em;
+}
+
+/* The drawer is a flex column, so an auto top margin pins this to the bottom. */
+.chat-drawer .drawer-sign-out {
+    margin-top: auto;
+    flex-shrink: 0;
+    /* Match the composer textbox: ~28px tall, centred in the bar's ~75px height. */
+    height: var(--control-h) !important;
+    min-height: var(--control-h);
+    margin-bottom: calc((var(--composer-h) - var(--control-h)) / 2 - 28px - 4px);
+}
+
+.identity-card {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 17px;
+    border: 1px solid #d7e8e2;
+    border-radius: 14px;
+    background: #eaf4f0;
+}
+
+.identity-card p {
+    margin: 0 0 5px;
+    color: #6b817b;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.identity-card h3 {
+    margin: 0;
+    color: #1f4c46;
+    font-size: 1.05rem;
+    font-weight: 650;
+}
+
+vaadin-button.drawer-action {
+    width: 100%;
+    margin: 8px 0 0;
+    justify-content: flex-start;
+    padding-inline: 12px;
+    color: #61746f;
+    background: transparent;
+    font-size: 0.82rem;
+    font-weight: 550;
+}
+
+vaadin-button.drawer-action:hover {
+    background: #eaf0ed;
+}
+
+vaadin-button.drawer-action::part(label),
+vaadin-button.contact-button::part(label) {
+    width: 100%;
+    text-align: left;
+}
+
+.drawer-section-title {
+    margin: 27px 0 8px;
+    color: #788982;
+    font-size: 0.7rem;
+    font-weight: 750;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+}
+
+.drawer-muted {
+    margin: 7px 12px 3px;
+    color: #91a09b;
+    font-size: 0.83rem;
+}
+
+vaadin-button.contact-button {
+    width: 100%;
+    min-width: 0;
+    min-height: 43px;
+    margin: 2px 0;
+    padding-inline: 14px;
+    justify-content: flex-start;
+    border-radius: 10px;
+    background: transparent;
+    color: #314640;
+    font-size: 0.9rem;
+    font-weight: 560;
+}
+
+vaadin-button.contact-button:hover {
+    background: #eaf0ed;
+}
+
+vaadin-button.contact-button.selected {
+    background: #dfeee8;
+    color: #15584f;
+    font-weight: 700;
+}
+
+.chat-content {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: #fbfcfb;
+}
+
+.thread-header {
+    width: 100%;
+    box-sizing: border-box;
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    padding: 0 34px;
+    border-bottom: 1px solid #e9eeeb;
+    background: #fff;
+}
+
+.thread-header h2 {
+    margin: 0;
+    color: #20332f;
+    font-size: 1.32rem;
+    font-weight: 680;
+    letter-spacing: -0.025em;
+}
+
+.thread-header p {
+    margin: 5px 0 0;
+    color: #86948f;
+    font-size: 0.83rem;
+}
+
+.message-area {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: #fbfcfb;
+}
+
+.message-stream {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 25px 28px;
+}
+
+.empty-state {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+}
+
+.empty-state::before {
+    content: "P";
+    display: grid;
+    width: 58px;
+    height: 58px;
+    margin-bottom: 18px;
+    place-items: center;
+    border: 1px solid #dcebe5;
+    border-radius: 18px;
+    background: #ebf5f0;
+    color: #28665d;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.empty-state h3 {
+    margin: 0;
+    color: #354944;
+    font-size: 1.07rem;
+    font-weight: 650;
+}
+
+.empty-state p {
+    max-width: 280px;
+    margin: 7px 0 0;
+    color: #899891;
+    font-size: 0.86rem;
+    line-height: 1.5;
+}
+
+.composer-bar {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    height: var(--composer-h);
+    display: flex;
+    align-items: center;
+    padding: 0 28px;
+    border-top: 1px solid #e9eeeb;
+    background: #fff;
+}
+
+.composer-bar vaadin-message-input {
+    width: 100%;
+    min-width: 0;
+}
+
+.composer-bar vaadin-message-input > vaadin-text-area,
+.composer-bar vaadin-message-input > vaadin-message-input-button {
+    height: var(--control-h);
+    min-height: var(--control-h);
+}
+
+.composer-bar vaadin-message-input > vaadin-text-area {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+@media (max-width: 700px) {
+    vaadin-app-layout.chat-shell {
+        --vaadin-app-layout-drawer-width: clamp(160px, 40vw, 220px);
+    }
+
+    .chat-drawer {
+        padding: 0 11px 20px !important;
+    }
+
+    .drawer-tagline {
+        display: none;
+    }
+
+    .thread-header {
+        padding: 0 16px;
+    }
+
+    .message-stream {
+        padding: 16px 10px;
+    }
+
+    .composer-bar {
+        padding: 0 8px;
+    }
+}

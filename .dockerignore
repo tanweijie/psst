@@ -1,0 +1,10 @@
+.git
+.idea
+.codex
+target
+node_modules
+.mvn
+mvnw
+mvnw.cmd
+src/main/frontend/generated
+vite.generated.ts
