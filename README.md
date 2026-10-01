@@ -39,11 +39,9 @@ The local Compose database accepts connections without a password only on its pr
 - `chat/ui`: the AppLayout chat screen and Spring Security configuration for its generated one-time-token pages.
 - `src/main/frontend/styles.css` styles chat; `src/main/resources/org/springframework/security/default-ui.css` styles Spring Security's generated login pages without replacing their forms.
 - `chat/service/ChatService.java`: owns contacts, conversations, messages, and in-memory delivery. It checks membership, validates messages, and publishes after commit through `UI.access` and Vaadin Push.
-- `chat/service/UserIdentityService.java`: normalizes usernames and calls `ChatService` to load or create users for Spring Security.
+- `chat/service/UserService.java`: normalizes usernames and calls `ChatService` to load or create users for Spring Security.
 - `chat/persistence`: four JPA entities and four `JpaRepository` interfaces. There is no SQL embedded in Java.
 - `src/main/resources/db/migration`: Flyway creates the schema in V1, renames the participant table in V2, and removes redundant conversation columns in V3. Existing participants and messages stay in place. Hibernate validates the result on startup.
-
-A direct chat is a conversation row with two participant rows. Creating it locks the user with the lower ID, so simultaneous clicks through the app serialize; the conversation and its two membership rows commit together. The database prevents duplicate membership rows, while pair uniqueness depends on that application lock. Sending saves a message in a transaction and publishes only in `afterCommit`, so clients do not see a message that rolled back. Push is a server update, not proof that a client received or read the message. The last 100 messages load when a thread is selected, including after a page refresh; pushed messages are deduplicated by message ID.
 
 Spring Security authenticates with a one-time token, but this local demo **prints that credential to the application log** instead of delivering it privately to the named user. Anyone who can read the logs can claim an existing username, and new usernames are created on first sign-in. Do not use this demo for secrets. A session signed in as `charlie` is denied access to an Alice/Bob thread at the service boundary, even if it knows the thread ID. The message list renders plain text with Markdown disabled, so `<b>Hello</b>` appears literally. No message bodies are intentionally logged.
 
